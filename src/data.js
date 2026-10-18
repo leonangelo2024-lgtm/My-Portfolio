@@ -36,9 +36,9 @@ export const projects = [
 export const contacts = [
   { label: 'Email', icon: 'email', url: 'mailto:leonangelo2024@gmail.com' },
   { label: 'Phone', icon: 'phone', url: 'tel:+94762909827' },
+  { label: 'WhatsApp', icon: 'whatsapp', url: 'https://wa.me/94762909827' },
   { label: 'Facebook', icon: 'facebook', url: 'https://www.facebook.com/share/1DrZjmX5oN/' },
   { label: 'Instagram', icon: 'instagram', url: 'https://www.instagram.com/leon_angelo21' },
-  { label: 'WhatsApp', icon: 'whatsapp', url: 'https://wa.me/94762909827' },
 ]
 
 export const socials = [

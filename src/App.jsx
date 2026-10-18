@@ -3,6 +3,7 @@ import { profile, interests, skills, projects, contacts, socials } from './data'
 import { MdEmail, MdPhone } from 'react-icons/md'
 import { FaFacebook, FaInstagram, FaGithub, FaLinkedin, FaTwitter, FaWhatsapp } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
+import Cursor from './Cursor'
 
 const iconMap = {
   email: MdEmail,
@@ -135,6 +136,7 @@ function App() {
 
   return (
     <>
+      <Cursor />
       <Nav />
       <main>
         <Hero />

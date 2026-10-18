@@ -35,13 +35,16 @@ export const projects = [
 // Real contact links
 export const contacts = [
   { label: 'Email', icon: 'email', url: 'mailto:leonangelo2024@gmail.com' },
-  { label: 'Phone', icon: 'phone', url: 'tel:+96762909827' },
+  { label: 'Phone', icon: 'phone', url: 'tel:+94762909827' },
   { label: 'Facebook', icon: 'facebook', url: 'https://www.facebook.com/share/1DrZjmX5oN/' },
   { label: 'Instagram', icon: 'instagram', url: 'https://www.instagram.com/leon_angelo21' },
-  { label: 'Github', icon: 'github', url: 'https://github.com/leonangelo2024-lgtm' },
+  { label: 'WhatsApp', icon: 'whatsapp', url: 'https://wa.me/94762909827' },
 ]
 
-export const socials = contacts.filter(
-  (c) => c.url && !c.url.startsWith('mailto:') && !c.url.startsWith('tel:')
-)
+export const socials = [
+  ...contacts.filter(
+    (c) => c.url && !c.url.startsWith('mailto:') && !c.url.startsWith('tel:')
+  ),
+  { label: 'GitHub', icon: 'github', url: 'https://github.com/leonangelo2024-lgtm' },
+]
 

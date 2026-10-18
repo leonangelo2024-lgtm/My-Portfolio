@@ -1,18 +1,19 @@
 import { useState } from 'react'
 import { profile, interests, skills, projects, contacts, socials } from './data'
 import { MdEmail, MdPhone } from 'react-icons/md'
-import { FaFacebook, FaInstagram, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
+import { FaFacebook, FaInstagram, FaGithub, FaLinkedin, FaTwitter, FaWhatsapp } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
 
 const iconMap = {
-  email:     MdEmail,
-  phone:     MdPhone,
-  facebook:  FaFacebook,
+  email: MdEmail,
+  phone: MdPhone,
+  facebook: FaFacebook,
   instagram: FaInstagram,
-  github:    FaGithub,
-  linkedin:  FaLinkedin,
-  twitter:   FaTwitter,
-  x:         FaXTwitter,
+  whatsapp: FaWhatsapp,
+  github: FaGithub,
+  linkedin: FaLinkedin,
+  twitter: FaTwitter,
+  x: FaXTwitter,
 }
 
 function ContactIcon({ name }) {
@@ -200,7 +201,7 @@ function App() {
       </main>
 
       <footer className="footer">
-        © {new Date().getFullYear()} {profile.name}. Built with React.
+        © {new Date().getFullYear()} {profile.name}.
       </footer>
     </>
   )

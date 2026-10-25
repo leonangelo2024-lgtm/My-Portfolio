@@ -4,7 +4,7 @@
 export const profile = {
   name: 'Leon Angelo Kurumbalapitiya',
   initials: 'LAK',
-  tagline: 'Aspiring developer building things for the web with React.',
+  tagline: 'Aspiring developer building things out of thin air for the future.',
   // placeholder
   bio: [
     "Hi, I'm Leon Angelo. I'm learning to build modern websites and apps with React, and I enjoy turning ideas into things people can actually click on.",

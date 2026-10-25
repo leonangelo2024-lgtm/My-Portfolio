@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { profile, interests, skills, projects, contacts, socials } from './data'
 import { MdEmail, MdPhone } from 'react-icons/md'
 import { FaFacebook, FaInstagram, FaGithub, FaLinkedin, FaTwitter, FaWhatsapp } from 'react-icons/fa'
 import { FaXTwitter } from 'react-icons/fa6'
-import Cursor from './Cursor'
+
 
 const iconMap = {
   email: MdEmail,
@@ -29,8 +29,40 @@ const sections = [
   { id: 'contact', label: 'Contact' },
 ]
 
+function useActiveSection(sectionIds) {
+  const [activeId, setActiveId] = useState(null)
+
+  useEffect(() => {
+    const elements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean)
+
+    if (elements.length === 0) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Find the entry with the largest intersection ratio
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+
+        if (visible.length > 0) {
+          setActiveId(visible[0].target.id)
+        }
+      },
+      { rootMargin: '-40% 0px -40% 0px', threshold: [0, 0.2, 0.4, 0.6, 0.8, 1] }
+    )
+
+    elements.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [sectionIds])
+
+  return activeId
+}
+
 function Nav() {
   const [open, setOpen] = useState(false)
+  const activeId = useActiveSection(['top', ...sections.map((s) => s.id)])
 
   return (
     <header className="nav">
@@ -39,39 +71,43 @@ function Nav() {
           {profile.initials}
         </a>
 
-        <div className="nav-right">
-          <nav className={open ? 'nav-links open' : 'nav-links'}>
-            {sections.map((s) => (
-              <a key={s.id} href={`#${s.id}`} onClick={() => setOpen(false)}>
-                {s.label}
-              </a>
-            ))}
-
-            {socials.length > 0 && (
-              <div className="nav-mobile-socials">
-                <span className="nav-mobile-socials-title">Connect</span>
-                <div className="nav-mobile-social-pills">
-                  {socials.map((s) => (
-                    <a
-                      key={s.label}
-                      href={s.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="nav-mobile-social-pill"
-                      onClick={() => setOpen(false)}
-                    >
-                      <ContactIcon name={s.icon} />
-                      <span>{s.label}</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
-          </nav>
+        <nav className={open ? 'nav-links open' : 'nav-links'}>
+          {sections.map((s) => (
+            <a
+              key={s.id}
+              href={`#${s.id}`}
+              className={activeId === s.id ? 'active' : ''}
+              onClick={() => setOpen(false)}
+            >
+              {s.label}
+            </a>
+          ))}
 
           {socials.length > 0 && (
+            <div className="nav-mobile-socials">
+              <span className="nav-mobile-socials-title">Connect</span>
+              <div className="nav-mobile-social-pills">
+                {socials.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="nav-mobile-social-pill"
+                    onClick={() => setOpen(false)}
+                  >
+                    <ContactIcon name={s.icon} />
+                    <span>{s.label}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </nav>
+
+        <div className="nav-right">
+          {socials.length > 0 && (
             <div className="nav-socials" aria-label="Social media links">
-              <span className="nav-divider" aria-hidden="true" />
               {socials.map((s) => (
                 <a
                   key={s.label}
@@ -136,7 +172,6 @@ function App() {
 
   return (
     <>
-      <Cursor />
       <Nav />
       <main>
         <Hero />
